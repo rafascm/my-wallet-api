@@ -8,10 +8,10 @@ router.post('/sign-up', async (req: Request, res: Response) => {
   const params = req.body
 
   if (signUp.validate(params).error) return res.sendStatus(422)
-  if (await isEmailNotUnique(params)) return res.sendStatus(409)
+  if (await isEmailNotUnique(params.email)) return res.sendStatus(409)
 
   try {
-    const user = createUser(params)
+    const user = await createUser(params)
     return res.status(201).send(user)
   } catch {
     res.sendStatus(500)

@@ -1,6 +1,5 @@
 import db from '../db'
 import bcrypt from 'bcrypt'
-import { Request } from 'express'
 
 export type User = {
   id: number
@@ -19,9 +18,10 @@ const createUser = async (user: any) => {
 
   try {
     const res = await db.query(
-      `INSERT INTO users (username, email, password) VALUES ($1,$2,$3) RETURNING *`,
+      `INSERT INTO users (name, email, password) VALUES ($1,$2,$3) RETURNING *`,
       [name, email, encPwd]
     )
+    console.log(res)
     return getUserData(res.rows[0])
   } catch (e) {
     console.log(e.message)

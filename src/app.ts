@@ -8,4 +8,4 @@ app.use(express.json())
 
 app.use('/api', auth)
 
-app.listen(process.env.APP_PORT)
+export default app
